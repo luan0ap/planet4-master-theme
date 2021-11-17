@@ -96,6 +96,7 @@ job-references:
         auth:
           <<: *docker_auth
     working_directory: /home/circleci/
+    parallelism: 4
     environment:
       APP_HOSTNAME: www.planet4.test
       APP_HOSTPATH:
@@ -167,6 +168,12 @@ commands:
           name: << parameters.test-name >>
           command: |
             << parameters.env >>
+            cd planet4-docker-compose
+            docker-compose exec php-fpm rsync -a --delete public/wp-content/themes/planet4-master-theme/tests/acceptance/ public/wp-content/plugins/planet4-plugin-gutenberg-blocks/tests/acceptance/ tests/acceptance/
+            docker-compose exec php-fpm rsync -a --delete public/wp-content/themes/planet4-master-theme/tests/data/ tests/_data/
+            docker-compose exec circleci tests glob tests/acceptance/ > tests/test_list.txt
+            docker-compose exec circleci tests split tests/test_list.txt
+            docker-compose exec php-fpm tests/vendor/bin/codecept run acceptance --no-redirect --xml=junit.xml --html --coverage --coverage-html coverage_acceptance
             << parameters.test-command >>
       - run:
           name: Test - Extract test artifacts
