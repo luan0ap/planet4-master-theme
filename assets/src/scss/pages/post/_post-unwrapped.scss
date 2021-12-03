@@ -1,0 +1,94 @@
+@import "../../base/variables";
+@import "../../base/mixins";
+@import "../../base/colors";
+
+// This file is identical to _post.scss, except all avoidable nesting of selectors is removed.
+// We can only really do this once we split CSS per post type.
+@include large-and-up {
+  .post-content,
+  .author-block,
+  .page-header {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 776px;
+  }
+}
+
+@include x-large-and-up {
+  .post-content,
+  .author-block,
+  .page-header {
+    max-width: 736px;
+  }
+}
+
+.skewed-overlay {
+  mask-image: none;
+}
+
+.page-header-title {
+  color: $grey-80;
+  hyphens: none;
+  max-width: none;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.single-post-meta {
+  color: $grey-40;
+  font-size: 14px;
+  font-family: $roboto;
+  border-bottom: 1px solid transparentize($grey-20, 0.5);
+  padding-bottom: 16px;
+  line-height: 24px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: end;
+
+  a {
+    color: inherit;
+  }
+}
+
+.single-post-meta-bullet {
+  margin: 0 8px;
+}
+
+.author-pic {
+  border-radius: 50%;
+  object-fit: cover;
+  max-height: 50px;
+}
+
+.single-post-author {
+  display: block;
+  margin: 0;
+  font-weight: 500;
+}
+
+.single-post-time,
+.comment-link {
+  display: inline-block;
+  margin: 0;
+}
+
+.comment-link {
+  font-weight: 500;
+
+  img {
+    width: 17px;
+  }
+
+  svg {
+    top: -2px;
+  }
+}
+.post-articles-block .articles-block {
+  border-top: 1px solid transparentize($grey-20, 0.5);
+  padding-top: 16px;
+
+  @include medium-and-up {
+    padding-top: 24px;
+  }
+}

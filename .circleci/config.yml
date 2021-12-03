@@ -7,42 +7,9 @@ orbs:
 workflows:
   branch:
     jobs:
-      - php74-tests:
-          context: org-global
-      - frontend-tests:
-          context: org-global
-      - acceptance-tests:
-          context: org-global
-      - commitlint:
-          context: org-global
-      #- a11y-tests
       - create-zip:
           context: org-global
           filters:
-            tags:
-              only: /^v\p{Digit}+\.\p{Digit}+.*/
-      - request-instance:
-          context: org-global
-          requires:
-            - create-zip
-      - instance-ready:
-          type: approval
-          requires:
-            - request-instance
-      - comment-pr:
-          context: org-global
-          requires:
-            - instance-ready
-      - lighthouse:
-          requires:
-            - instance-ready
-      - publish-zip:
-          context: org-global
-          requires:
-            - create-zip
-          filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /^v\p{Digit}+\.\p{Digit}+.*/
 
@@ -333,7 +300,7 @@ jobs:
           command: PUPPETEER_SKIP_DOWNLOAD=true PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci
       - run:
           name: Build assets
-          command: npm run build
+          command: npm run build && ls -lh assets/build/*.css
       - run:
           name: Remove unnecessary files
           command: rm -rf .circleci .git .githooks assets/src bin
