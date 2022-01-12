@@ -12,7 +12,7 @@ final class GoogleDocsClient {
 	/**
 	 * @var Client
 	 */
-	private $client;
+	public $client;
 
 	/**
 	 * Create from JSON config.
