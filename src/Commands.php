@@ -25,5 +25,13 @@ class Commands {
 		SaveCloudflareKey::register();
 		CloudflarePurge::register();
 		FixOrphans::register();
+
+		\WP_CLI::add_command(
+			'p4 update-hp',
+			function () {
+				$record = MigrationRecord::start( static::class );
+				Migrations\M008UpdateHappyPointAttributes::execute( $record );
+			}
+		);
 	}
 }
