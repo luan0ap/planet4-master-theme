@@ -41,10 +41,9 @@
       }
 
       select {
-        @extend .form-select;
-        background: transparent;
         appearance: none;
         position: relative;
+        height: 48px;
       }
     }
 
@@ -55,11 +54,6 @@
       }
     }
 
-    textarea,
-    input:not([type="file"]) {
-      @extend .form-control;
-    }
-
     input {
       height: 48px;
     }
@@ -67,11 +61,8 @@
     .gfield_checkbox,
     .gfield_radio,
     .ginput_container {
-      @extend .custom-control;
-
       input[type="checkbox"] ~ label,
       input[type="radio"] ~ label {
-        @extend .custom-control-description;
         font-size: $font-size-sm;
         line-height: 1.25;
       }
@@ -79,12 +70,6 @@
       .gchoice {
         margin-bottom: $sp-1;
         position: relative;
-      }
-
-      button:not(.add_list_item):not(.delete_list_item) {
-        @extend .btn;
-        @extend .btn-secondary;
-        @extend .btn-small;
       }
     }
 
@@ -101,7 +86,13 @@
       input:not([type="file"]),
       textarea,
       select {
-        @extend .is-invalid;
+        border-color: $dark-orange;
+        background: $white;
+        background-image: none;
+
+        &:focus {
+          border-color: $dark-orange;
+        }
       }
 
       .gfield_validation_message {
@@ -136,12 +127,6 @@
       }
     }
 
-    .ginput_container_fileupload .gform_button_select_files {
-      @extend .btn;
-      @extend .btn-secondary;
-      @extend .btn-small;
-    }
-
     @include medium-and-up {
       .gfield_validation_message,
       .ginput_container,
@@ -151,11 +136,6 @@
         max-width: 400px;
       }
     }
-  }
-
-  .gform_footer input[type="submit"] {
-    @extend .btn;
-    @extend .btn-primary;
   }
 }
 
