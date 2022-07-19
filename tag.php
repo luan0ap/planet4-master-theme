@@ -70,19 +70,12 @@ if ( is_tag() ) {
 		}
 		$context['page_category'] = 'Tag Page';
 
-		if ( ListingPagePagination::is_active() ) {
-			$view = ListingPageGridView::is_active() ? 'grid' : 'list';
+		$view = ListingPageGridView::is_active() ? 'grid' : 'list';
 
-			$query_template = file_get_contents( get_template_directory() . "/parts/query-$view.html" );
+		$query_template = file_get_contents( get_template_directory() . "/parts/query-$view.html" );
 
-			$content = do_blocks( $query_template );
-
-			$context['query_loop'] = $content;
-
-			$campaign = new TaxonomyCampaign( $templates, $context );
-			$campaign->view();
-			exit();
-		}
+		$content               = do_blocks( $query_template );
+		$context['query_loop'] = $content;
 
 		$campaign = new TaxonomyCampaign( $templates, $context );
 
