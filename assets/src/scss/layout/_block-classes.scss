@@ -19,7 +19,8 @@
   padding: $sp-1 $sp-1x;
   border: 1px solid transparent;
 
-  &:hover:not(.dots) {
+  &:hover:not(.dots),
+  &:hover:not(.current) {
     text-decoration: none;
     background-color: $grey-10;
     border-color: $grey-10;
